@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 {% load static %}
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>talk to me</title>
-    <script type="text/javascript" src="{% static 'talk/scripts/jquery-2.1.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'talk/scripts/jquery.js' %}"></script>
     <!-- Foundation & FontAwesome -->
     <link rel="stylesheet" type="text/css" href="{% static 'talk/css/foundation.min.css' %}">
     <script src="{% static 'talk/scripts/d3.min.js' %}"></script>
@@ -21,36 +21,21 @@
           document.body.setAttribute('style', 'background-image: '+pattern.dataUrl);
         });
     </script>
-    <style type="text/css">
-      .comment{
-        background:rgba(255,255,255,1);
-        padding: 8px;
-        margin-bottom:5px;
-        border:none;
-      }
-      .white{
-        background:rgba(255,255,255,1);
-        padding-top: 10px;
-        border:none;
-      }
-      .commentcenter{
-        position:relative;
-        left:43%;
-      }
-      input.textarea:focus{
-        height:1.5em;
-        resize:none;
-      }
-      textarea{
-        height:1.5em;
-        resize:none;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'talk/css/talk.css' %}">
     {% block head %}
     {% endblock %}
-  </head>
-  <body>
-  {% block content %}
-  {% endblock %}
-  </body>
+</head>
+ <body>
+    <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+            <div class="grid-x grid-padding-x">
+                <div class="large-2 medium-2 cell"></div>
+                    {% block content %}
+                    {% endblock %}
+                <div class="large-2 medium-2 cell"></div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'talk/scripts/main.js' %}"></script>
+ </body>
 </html>
