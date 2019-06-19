@@ -7,3 +7,10 @@ class PostForm(forms.ModelForm):
         model = Post
         # exclude = ['author', 'updated', 'created', ]
         fields = ['text']
+        widgets = {
+            'text': forms.TextInput(attrs={
+                'id': 'post-text',
+                'required': True,
+                'Placeholder': 'Say what you need to say...'
+            })
+        }
