@@ -25,7 +25,7 @@ SECRET_KEY = 'a#1ndq!k1k68iob&@0c6fxy4ra(^o#v3l9t8z!2hlsve$l%604'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -55,7 +55,9 @@ ROOT_URLCONF = 'talk_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates")
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,4 +120,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+# appends 'static' to the base url (localhost:8000)
+STATIC_URL = "/static/"
+# tuple command to look for 'static' files which
+# are tied to a particular app (not within app folders)
+# Here, django also looks for 'static' in our root project folder
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+# tells django to collect all static into this folder in our root,
+# when we run "python manage.py collectstatic"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
