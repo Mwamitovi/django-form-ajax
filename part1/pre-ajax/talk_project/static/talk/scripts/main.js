@@ -1,5 +1,12 @@
 $(function() {
 
+    // Submit post upon submit
+    $('#post-form').on('submit', function($e) {
+        $e.preventDefault();
+        console.log("form submitted!")  // sanity check
+        create_post();
+    });
+
     // This function gets cookie with a given name
     function getCookie(name) {
         var cookieValue = null;
