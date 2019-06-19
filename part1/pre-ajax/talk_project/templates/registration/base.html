@@ -1,25 +1,29 @@
-{% load staticfiles %}
-
-<!doctype html>
+<!DOCTYPE html>
+{% load static %}
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% block head %}
-
-    {% endblock %}
-    <link rel="stylesheet" href="{% static "bower_components/foundation/css/foundation.css" %}" />
-    <script src="{% static "bower_components/modernizr/modernizr.js" %}"></script>
+    {% block head %}{% endblock head %}
+    <link rel="stylesheet" href="{% static 'talk/css/foundation.min.css' %}" />
+    <!-- <script src="{% static "bower_components/modernizr/modernizr.js" %}"></script> -->
+    <style type="text/css">
+        body > .grid-x { padding-top: 13%; }
+    </style>
   </head>
   <body>
-
-    <div class='row'>
-      {% block content %}
-      {% endblock %}
+    <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+            <div class="grid-x grid-padding-x">
+                <div class="large-4 medium-4 cell"></div>
+                    {% block content %}
+                    {% endblock %}
+                <div class="large-4 medium-4 cell"></div>
+            </div>
+        </div>
     </div>
-
-    <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation.min.js" %}"></script>
+    <script src="{% static 'talk/scripts/jquery.js' %}"></script>
+    <script src="{% static 'talk/scripts/foundation.min.js' %}"></script>
     <script>
       $(document).foundation();
     </script>
