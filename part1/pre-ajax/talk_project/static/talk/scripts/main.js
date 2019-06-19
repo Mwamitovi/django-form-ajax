@@ -19,6 +19,10 @@ $(function() {
             success: function(json) {
                 $("#post-text").val('');      // remove the value from the input
                 console.log(json);            // log the returned json to the console
+                $("#talk").prepend(
+                    "<li><strong>" + json.text + "</strong> - <em>" +
+                    json.author + "</em> - <span>" + json.created + "</span></li>"
+                );
                 console.log("success");       // another sanity check  
             },
 
@@ -27,7 +31,7 @@ $(function() {
                 $("#results").html(      // add the error to the DOM
                     "<div class='alert-box alert radius' data-alert>" +
                     " Oops! We have encountered an error:" + errmsg +
-                    " <a href='#' class='close'>#times;" +
+                    " <a href='#' class='close'>&times;" +
                     " </a></div>"
                 );
                 console.log(xhr.status + ": " + 
@@ -37,7 +41,7 @@ $(function() {
         });
     };
 
-    // This function gets cookie with a given name
+    // This function gets the cookie with a given name
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {
