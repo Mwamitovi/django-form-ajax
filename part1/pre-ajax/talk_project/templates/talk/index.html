@@ -1,29 +1,33 @@
 {% extends "talk/base.html" %}
 {% block content %}
 <br><br>
-<div class="grid-container fluid">
+<div class='large-8 medium-8 cell'>
+    <div class="callout maintalk">
     <div class="row white">
         <div class="large-12 columns">
             {% if user.is_authenticated %}
                 <a href="/logout" class="right">Logout</a>
                 <h2>Hi, {{request.user.username}}</h2>
             {% else %}
-                <h2>Please login</h2>
+                <h2>Please login...</h2>
             {% endif %}
         </div>
     </div>
     <div class="row white">
         <div class="columns large-12">
-            <form action="/create_post/" method="POST">
-                {% csrf_token %}
+          {% if user.is_authenticated %}
+            <form action="/create_post/" method="POST" id="post-form">
+              {% csrf_token %}
                 <div class="fieldWrapper">
                     {{ form.text }}
                 </div>
                 <input type="submit" value="Post" class="large button">
             </form>
+          {% else %}
+            <a href="/login" class="large button">Log In</a>
+          {% endif %}
         </div>
     </div>
-
     <!-- The feed -->
     <div class="row white">
         <div class="columns large-12">
@@ -38,6 +42,5 @@
             </ul>
         </div>
     </div>
-</div>
-
+</div></div>
 {% endblock %}
