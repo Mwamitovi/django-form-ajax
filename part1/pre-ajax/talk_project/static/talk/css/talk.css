@@ -1,0 +1,28 @@
+/* Customized styles for talk v1.0.0 */
+
+body > .grid-x { 
+    padding-top: 13%; 
+}
+.comment{
+    background:rgba(255,255,255,1);
+    padding: 8px;
+    margin-bottom:5px;
+    border:none;
+}
+.white{
+    background:rgba(255,255,255,1);
+    padding-top: 10px;
+    border:none;
+}
+.commentcenter{
+    position:relative;
+    left:43%;
+}
+input.textarea:focus{
+    height:1.5em;
+    resize:none;
+}
+textarea{
+    height:1.5em;
+     resize:none;
+}
