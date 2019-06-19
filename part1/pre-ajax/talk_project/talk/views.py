@@ -5,10 +5,8 @@ from talk.forms import PostForm
 
 
 def home(request, template_name):
-    tmpl_vars = {
-        'all_posts': Post.objects.reverse(),
-        'form': PostForm()
-    }
+    all_posts = Post.objects.reverse()
+    form = PostForm()
     return render(request, template_name, locals())
 
 
