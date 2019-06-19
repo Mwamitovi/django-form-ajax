@@ -30,6 +30,7 @@
         </div>
     </div>
     <!-- The feed -->
+  {% if user.is_authenticated %}
     <div class="row white">
         <div class="columns large-12">
             <ul id="talk">
@@ -43,5 +44,6 @@
             </ul>
         </div>
     </div>
+  {% endif %}
 </div></div>
 {% endblock %}
