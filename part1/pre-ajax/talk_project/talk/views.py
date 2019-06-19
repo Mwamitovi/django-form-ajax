@@ -4,16 +4,15 @@ from talk.models import Post
 from talk.forms import PostForm
 
 
-def home(req):
-
+def home(request, template_name):
     tmpl_vars = {
         'all_posts': Post.objects.reverse(),
         'form': PostForm()
     }
-    return render(req, 'talk/index.html', tmpl_vars)
+    return render(request, template_name, locals())
 
 
-def create_post(request):
+def create_post(request, template_name):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -23,4 +22,4 @@ def create_post(request):
             return HttpResponseRedirect('/')
     else:
         form = PostForm()
-    return render(request, 'post.html', {'form': form})
+    return render(request, template_name, {'form': form})
