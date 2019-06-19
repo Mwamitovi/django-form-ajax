@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login', login),
     url(r'^logout/$', views.logout_page),
+    url(r'^', include('talk.urls', namespace='talk')),
 ]
