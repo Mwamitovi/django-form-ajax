@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 env-talk
 db.sqlite3
+.idea/
 
 # C extensions
 *.so
