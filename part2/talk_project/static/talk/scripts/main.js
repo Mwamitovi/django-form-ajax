@@ -27,8 +27,8 @@ $(function() {
                 $("#post-text").val('');      // remove the value from the input
                 console.log(json);            // log the returned json to the console
                 $("#talk").prepend(
-                    "<li><strong>" + json.text + "</strong> - <em>" +
-                    json.author + "</em> - <span>" + json.created + 
+                    "<li id='post-" + json.postpk + "'><strong>" + json.text +
+                    "</strong> - <em>" + json.author + "</em> - <span>" + json.created + 
                     "</span> - <a id='delete-post-" + json.postpk + "'>delete me</a></li>"
                 );
                 console.log("success");       // another sanity check  
@@ -59,7 +59,7 @@ $(function() {
 
                 success: function(json) {                    
                     $('#post-' + post_primary_key).hide();   // hide the post upon success
-                    console.log("post deletion successful"); // sanity check
+                    console.log("post deleted successfully"); // sanity check
                 },
 
                 error: function(xhr, errmsg, err) {
