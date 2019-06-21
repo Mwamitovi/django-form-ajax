@@ -10,7 +10,7 @@ $(function() {
     // Delete post on click
     $('#talk').on('click', 'a[id^=delete-post-]', function(){
         var post_primary_key = $(this).attr('id').split('-')[2];
-        console.log(post_primary_key)       // sanity check
+        console.log(post_primary_key);       // sanity check
         delete_post(post_primary_key);
     });
 
@@ -28,7 +28,8 @@ $(function() {
                 console.log(json);            // log the returned json to the console
                 $("#talk").prepend(
                     "<li><strong>" + json.text + "</strong> - <em>" +
-                    json.author + "</em> - <span>" + json.created + "</span></li>"
+                    json.author + "</em> - <span>" + json.created + 
+                    "</span> - <a id='delete-post-" + json.postpk + "'>delete me</a></li>"
                 );
                 console.log("success");       // another sanity check  
             },
