@@ -7,6 +7,13 @@ $(function() {
         create_post();
     });
 
+    // Delete post on click
+    $('#talk').on('click', 'a[id^=delete-post-]', function(){
+        var post_primary_key = $(this).attr('id').split('-')[2];
+        console.log(post_primary_key)       // sanity check
+        delete_post(post_primary_key);
+    });
+
     // AJAX for posting
     function create_post() {
         console.log("create post is working!");  // sanity check
