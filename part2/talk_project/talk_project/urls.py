@@ -1,14 +1,15 @@
-from django.conf.urls import patterns, include, url
-from talk_project.views import logout_page
-
+# talk_project/urls.py
+from django.conf.urls import include, url
+from django.contrib.auth.views import login
 from django.contrib import admin
+from talk_project import views
+
 admin.autodiscover()
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/', 'django.contrib.auth.views.login'),
-    (r'^logout/$', logout_page),
+    url(r'^login/', login),
+    url(r'^logout/$', views.logout_page),
     url(r'^', include('talk.urls')),
-)
+]
