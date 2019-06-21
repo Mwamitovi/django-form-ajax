@@ -16,18 +16,6 @@ def home(req):
     return render(req, 'talk/index.html', tmpl_vars)
 
 
-# def create_post(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = request.user
-#             post.save()
-#             return HttpResponseRedirect('/')
-#     else:
-#         form = PostForm()
-#     return render(request, 'post.html', {'form': form})
-
 def create_post(request):
     if request.method == 'POST':
         post_text = request.POST.get('the_post')
