@@ -49,6 +49,32 @@ $(function() {
         });
     };
 
+    // AJAX for deleting
+    function delete_post(post_primary_key) {
+        if (confirm('Are you sure you want to remove this post?') == true) {
+            $.ajax({
+                url: "delete_post/",                    // the endpoint
+                type: "DELETE",                         // http method
+                data: { postpk: post_primary_key },     // data sent with the delete request
+
+                success: function(json) {                    
+                    $('#post-' + post_primary_key).hide();   // hide the post upon success
+                    console.log("post deletion successful"); // sanity check
+                },
+
+                error: function(xhr, errmsg, err) {
+                    $('#results').html(                      // Add error to the DOM
+                        "<div class='alert-box alert radius' data-alert>" +
+                        "Oops! We have encountered an error. <a href='#' class='close'>&times;</a></div>"
+                    );
+                    console.log(xhr.status + ": " + xhr.responseText);  // provide more info about error
+                }
+            });
+        } else {
+            return false;
+        }
+    };
+
     // This function gets the cookie with a given name
     function getCookie(name) {
         var cookieValue = null;
