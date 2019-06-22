@@ -1,43 +1,40 @@
-{% extends "talk/base.html" %}
-{% load staticfiles %}
+{% extends "registration/base.html" %}
+{% load static %}
 
-{% block head %}
-  <title>Login</title>
-{% endblock %}
+{% block head %}<title>Login</title>{% endblock head %}
 
 {% block content %}
-  <header>
+<header>
     <center><h1></h1></center>
-  </header>
+</header>
 
-  <div class='large-4 large-offset-4 column'>
-    {% if form.errors %}
-        <div class='alert-box alert'>Oh fiddlesticks! Please try again.</div>
-      {% endif %}
-
+<div class='large-4 medium-4 cell'>
+  <div class="callout">
+  {% if form.errors %}
+    <div class='alert-box alert'>Oh fiddlesticks! Please try again.</div>
+    {% endif %}
     <section>
-      <form method="post" action=".">
-        {% csrf_token %}
-        <fieldset class='white'>
-          <legend>Login</legend>
-        <p>
-          <label for="id_username">Username:</label>
-          {{ form.username }}
-        </p>
-        <p>
-          <label for="id_password">Password:</label>
-          {{ form.password }}
-        </p>
-        {% if next %}
-          <input type="hidden" name="next" value="{{ next }}" />
-        {% else %}
-          <input type="hidden" name="next" value="/" />
-        {% endif %}
-        <input type="submit" value="Login" class='button expand radius'/>
-        </fieldset>
-      </form>
+        <form action="." method="POST">
+          {% csrf_token %}
+            <fieldset class='white'>
+                <legend><h3>Please enter details:</h3></legend>
+                <p>
+                    <label for="id_username">Username:</label>
+                    {{ form.username }}
+                </p>
+                <p>
+                    <label for="id_password">Password:</label>
+                    {{ form.password }}
+                </p>
+              {% if next %}
+                <input type="hidden" name="next" value="{{ next }}" />
+              {% else %}
+                <input type="hidden" name="next" value="/" />
+              {% endif %}
+                <input type="submit" value="Login" class='button expand radius'/>
+            </fieldset>
+        </form>
     </section>
-
   </div>
-
+</div>
 {% endblock %}
