@@ -20,3 +20,15 @@ def post_collection(request):
         posts = Post.objects.all()
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+def post_element(request, pk):
+    try:
+        post = Post.objects.get(pk=pk)
+    except Post.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = PostSerializer(post)
+        return Response(serializer.data)
