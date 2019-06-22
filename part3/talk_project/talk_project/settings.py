@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Kampala'
 
 USE_I18N = True
 
@@ -121,3 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# tuple, directs django to look for static assets
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# "collectstatic" files shall end up here
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
