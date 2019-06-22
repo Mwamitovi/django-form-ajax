@@ -1,8 +1,10 @@
 
-Django Form Handling, with AJAX (POST)
-======================================
+`Part 1`
 
-## SYNOPSIS
+Django and Form Handling, with AJAX (POST)
+==========================================
+
+## SYNOPSIS 
 
 This is basic form handling with Django/AJAX.
 We enter text, and post it to the DOM (without page reload).
