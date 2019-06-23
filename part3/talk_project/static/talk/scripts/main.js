@@ -5,14 +5,14 @@ $(function() {
     // Submit post upon submit
     $('#post-form').on('submit', function($e) {
         $e.preventDefault();
-        console.log("form submitted!");  // sanity check
+        // console.log("form submitted!");  // sanity check
         create_post();
     });
 
     // Delete post on click
     $('#talk').on('click', 'a[id^=delete-post-]', function(){
         var post_primary_key = $(this).attr('id').split('-')[2];
-        console.log(post_primary_key);       // sanity check
+        // console.log(post_primary_key);       // sanity check
         delete_post(post_primary_key);
     });
 
@@ -25,7 +25,7 @@ $(function() {
             // handle a successful response
             success: function(json) {
                 for(var i=0; i<json.length; i++) {
-                    console.log(json[i])
+                    // console.log(json[i]);   // sanity check
                     dateString = convert_to_readable_date(json[i].created);
                     $("#talk").prepend(
                         "<li id='post-" + json[i].id + "'><strong>" + json[i].text +
@@ -51,26 +51,28 @@ $(function() {
     function convert_to_readable_date(date_time_string) {
         var newDate = moment(date_time_string).format('MM/DD/YYYY, h:mm:ss a');
         return newDate
-    }
+    };
 
     // AJAX for posting
     function create_post() {
-        console.log("create post is working!");  // sanity check
+        // console.log("create post is working!");  // sanity check
         $.ajax({
-            url: "create_post/",    // the endpoint
+            // url: "create_post/",    // the endpoint
+            url: "api/v1/posts/",    // the (api) endpoint 
             type: "POST",           // http method
             data: { the_post: $("#post-text").val() }, // data sent with the post request
 
             // handles a successful response
             success: function(json) {
                 $("#post-text").val('');      // remove the value from the input
-                console.log(json);            // log the returned json to the console
+                // console.log(json);            // log the returned json to the console
+                dateString = convert_to_readable_date(json.created);
                 $("#talk").prepend(
-                    "<li id='post-" + json.postpk + "'><strong>" + json.text +
-                    "</strong> - <em>" + json.author + "</em> - <span>" + json.created + 
-                    "</span> - <a id='delete-post-" + json.postpk + "'>delete me</a></li>"
+                    "<li id='post-" + json.id + "'><strong>" + json.text +
+                    "</strong> - <em>" + json.author + "</em> - <span>" + dateString + 
+                    "</span> - <a id='delete-post-" + json.id + "'>delete me</a></li>"
                 );
-                console.log("success");       // another sanity check  
+                // console.log("success");       // another sanity check  
             },
 
             // handle a failed response 
@@ -98,7 +100,7 @@ $(function() {
 
                 success: function(json) {                    
                     $('#post-' + post_primary_key).hide();   // hide the post upon success
-                    console.log("post deleted successfully"); // sanity check
+                    // console.log("post deleted successfully"); // sanity check
                 },
 
                 error: function(xhr, errmsg, err) {
