@@ -26,10 +26,11 @@ $(function() {
             success: function(json) {
                 for(var i=0; i<json.length; i++) {
                     console.log(json[i])
+                    dateString = convert_to_readable_date(json[i].created);
                     $("#talk").prepend(
                         "<li id='post-" + json[i].id + "'><strong>" + json[i].text +
                         "</strong> - <em>" + json[i].author + "</em> - <span>" +
-                        json[i].created + "</span> - <a id='delete-post-" + 
+                        dateString + "</span> - <a id='delete-post-" + 
                         json[i].id + "'>delete me</a></li>"
                     );
                 }
@@ -45,6 +46,12 @@ $(function() {
             }
         });
     };
+
+    // convert ugly date to human readable date
+    function convert_to_readable_date(date_time_string) {
+        var newDate = moment(date_time_string).format('MM/DD/YYYY, h:mm:ss a');
+        return newDate
+    }
 
     // AJAX for posting
     function create_post() {
