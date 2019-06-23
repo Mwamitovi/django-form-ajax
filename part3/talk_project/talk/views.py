@@ -22,6 +22,7 @@ def post_collection(request):
         _posts = Post.objects.all()
         serializer = PostSerializer(_posts, many=True)
         return Response(serializer.data)
+
     elif request.method == 'POST':
         _data = {
             'text': request.data.get('the_post'),
@@ -34,7 +35,7 @@ def post_collection(request):
         return Response(serailizer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'DELETE'])
 def post_element(request, pk):
     try:
         post = Post.objects.get(pk=pk)
@@ -44,3 +45,14 @@ def post_element(request, pk):
     if request.method == 'GET':
         serializer = PostSerializer(post)
         return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+
+
+
