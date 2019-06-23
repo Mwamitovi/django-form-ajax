@@ -69,7 +69,7 @@ def post_collection(request):
     elif request.method == 'POST':
         _data = {
             'text': request.data.get('the_post'),
-            'author': request.user.pk
+            'author': request.user
         }
         serializer = PostSerializer(data=_data)
         if serializer.is_valid():
