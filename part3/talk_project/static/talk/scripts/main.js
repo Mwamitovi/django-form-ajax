@@ -55,36 +55,36 @@ $(function() {
 
     // AJAX for posting
     function create_post() {
-        // console.log("create post is working!");  // sanity check
+        // console.log("create post is working!");     // sanity check
         $.ajax({
-            // url: "create_post/",    // the endpoint
-            url: "api/v1/posts/",    // the (api) endpoint 
-            type: "POST",           // http method
+            // url: "create_post/",                    // the endpoint
+            url: "api/v1/posts/",                      // the (api) endpoint 
+            type: "POST",                              // http method
             data: { the_post: $("#post-text").val() }, // data sent with the post request
 
             // handles a successful response
             success: function(json) {
-                $("#post-text").val('');      // remove the value from the input
-                // console.log(json);            // log the returned json to the console
+                $("#post-text").val('');               // remove the value from the input
+                // console.log(json);                  // log the returned json to the console
                 dateString = convert_to_readable_date(json.created);
                 $("#talk").prepend(
                     "<li id='post-" + json.id + "'><strong>" + json.text +
                     "</strong> - <em>" + json.author + "</em> - <span>" + dateString + 
                     "</span> - <a id='delete-post-" + json.id + "'>delete me</a></li>"
                 );
-                // console.log("success");       // another sanity check  
+                // console.log("success");             // another sanity check  
             },
 
             // handle a failed response 
             error: function(xhr, errmsg, err) {
-                $("#results").html(      // add the error to the DOM
+                $("#results").html(                    // add the error to the DOM
                     "<div class='alert-box alert radius' data-alert>" +
                     " Oops! We have encountered an error:" + errmsg +
                     " <a href='#' class='close'>&times;" +
                     " </a></div>"
                 );
-                console.log(xhr.status + ": " + 
-                    xhr.responseText     // provide abit more info about the error
+                console.log(xhr.status + 
+                    ": " + xhr.responseText            // provide abit more info about the error
                 );
             }            
         });
@@ -94,21 +94,24 @@ $(function() {
     function delete_post(post_primary_key) {
         if (confirm('Are you sure you want to remove this post?') == true) {
             $.ajax({
-                url: "delete_post/",                    // the endpoint
-                type: "DELETE",                         // http method
-                data: { postpk: post_primary_key },     // data sent with the delete request
+                // url: "delete_post/",                             // the endpoint
+                url: "api/v1/posts/" + post_primary_key,            // the (api) endpoint
+                type: "DELETE",                                     // http method
+                data: { postpk: post_primary_key },                 // data sent with the delete request
 
                 success: function(json) {                    
-                    $('#post-' + post_primary_key).hide();   // hide the post upon success
-                    // console.log("post deleted successfully"); // sanity check
+                    $('#post-' + post_primary_key).hide();          // hide the post upon success
+                    // console.log("post deleted successfully");    // sanity check
                 },
 
                 error: function(xhr, errmsg, err) {
-                    $('#results').html(                      // Add error to the DOM
+                    $('#results').html(                             // Add error to the DOM
                         "<div class='alert-box alert radius' data-alert>" +
                         "Oops! We have encountered an error. <a href='#' class='close'>&times;</a></div>"
                     );
-                    console.log(xhr.status + ": " + xhr.responseText);  // provide more info about error
+                    console.log(xhr.status + 
+                        ": " + xhr.responseText                     // provide more info about error
+                    );  
                 }
             });
         } else {
