@@ -4,6 +4,7 @@ from django.http import HttpResponse, QueryDict
 import json
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 
 from talk.models import Post
 from talk.forms import PostForm
@@ -59,12 +60,22 @@ def delete_post(request):
     )
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def post_collection(request):
     if request.method == 'GET':
-        posts = Post.objects.all()
-        serializer = PostSerializer(posts, many=True)
+        _posts = Post.objects.all()
+        serializer = PostSerializer(_posts, many=True)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        _data = {
+            'text': request.data.get('the_post'),
+            'author': request.user.pk
+        }
+        serializer = PostSerializer(data=_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serailizer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
