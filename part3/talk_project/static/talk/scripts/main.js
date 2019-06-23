@@ -1,4 +1,6 @@
 $(function() {
+    // load all posts once pages loads
+    load_posts();
 
     // Submit post upon submit
     $('#post-form').on('submit', function($e) {
@@ -13,6 +15,36 @@ $(function() {
         console.log(post_primary_key);       // sanity check
         delete_post(post_primary_key);
     });
+
+    // AJAX for loading all posts
+    function load_posts() {
+        $.ajax({
+            url: "api/v1/posts",    // the endpoint
+            type: "GET",            // http method
+
+            // handle a successful response
+            success: function(json) {
+                for(var i=0; i<json.length; i++) {
+                    console.log(json[i])
+                    $("#talk").prepend(
+                        "<li id='post-" + json[i].id + "'><strong>" + json[i].text +
+                        "</strong> - <em>" + json[i].author + "</em> - <span>" +
+                        json[i].created + "</span> - <a id='delete-post-" + 
+                        json[i].id + "'>delete me</a></li>"
+                    );
+                }
+            },
+
+            // handle a failed response
+            error: function(xhr, errmsg, err) {
+                $("#results").html(     // add error message to DOM
+                    "<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " +
+                    errmsg + " <a href='#' class='close'>&times;</a></div>"
+                );
+                console.log(xhr.status + ": " + xhr.responseText);  // provide more info about the error
+            }
+        });
+    };
 
     // AJAX for posting
     function create_post() {
