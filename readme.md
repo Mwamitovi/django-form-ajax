@@ -27,6 +27,7 @@ Create a RESTFul API for our Django Talk Project using Django Rest Framework (DR
 In other words, we now convert a non-RESTful app into a RESTful one with DRF.
 
 - Part 4:
+We refactor the exiting RESTful API based on function based views to class based views.
 
 ### Contribution guidelines
    - Writing tests (Unit and Functional tests)
