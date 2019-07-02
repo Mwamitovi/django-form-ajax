@@ -2,8 +2,8 @@
 Django and Form Handling
 ========================
 
-This is a four-part series about Django aond how to handle form effectively.
-In the modern web 2.0 applications, there is often need for users to enter data.
+This is a four-part series about Django and how to handle form effectively.
+In the modern web 2.0 apps, there is often need for users to enter data.
 And proper functionality of a form is one of the key reasons, 
 why a user will abandon or keep using your app.
 
