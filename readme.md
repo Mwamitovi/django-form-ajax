@@ -23,6 +23,8 @@ Handling entered data, using the 'POST' HTTP method and AJAX
 Removing content, using the 'DELETE' HTTP method and AJAX
 
 - Part 3:
+Create a RESTFul API for our Django Talk Project using Django Rest Framework (DRF).
+In other words, we now convert a non-RESTful app into a RESTful one with DRF.
 
 - Part 4:
 

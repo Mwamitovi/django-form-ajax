@@ -16,7 +16,7 @@ This project is a [JavaScript/jQuery] front on [python/django] back.
 
 ** You need, but are not limited to,
    - python 3+
-   - Django 1.11.1
+   - Django 1.11.6
    - jQuery 3.3.1 (or higher version)(or other JS-framework)
    - Foundation (or other CSS framework)
    - Modern Browser (Chrome is recommended)
