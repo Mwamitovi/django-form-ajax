@@ -1,14 +1,11 @@
 # talk/views.py
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, QueryDict
-import json
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
-
 from talk.models import Post
 from talk.forms import PostForm
 from talk.serializers import PostSerializer
+
+from django.shortcuts import render
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.generics import GenericAPIView
 
 
 def home(request):
@@ -19,10 +16,27 @@ def home(request):
 # ------- CLASS_BASED VIEWS ----------
 
 
+class PostCollection(ListModelMixin, CreateModelMixin, GenericAPIView):
+    
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, * args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 # ------- FUNCTIONAL VIEWS ----------
+
+
+# from django.shortcuts import get_object_or_404
+# from django.http import HttpResponse, QueryDict
+# import json
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
+# from rest_framework import status
 
 
 # @api_view(['GET', 'POST'])
