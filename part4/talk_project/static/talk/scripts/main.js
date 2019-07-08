@@ -60,7 +60,10 @@ $(function() {
             // url: "create_post/",                         // the endpoint
             url: "api/v1/posts/",                           // the (api) endpoint 
             type: "POST",                                   // http method
-            data: { the_post: $("#post-text").val() },      // data sent with the post request
+            // data: { the_post: $("#post-text").val() },      // data sent with the post (function-view)
+            data: { text: $("#post-text").val(),
+                    author: $('#user').text() 
+                  },                                        // data sent with the post (class-based-view)
 
             // handles a successful response
             success: function(json) {
