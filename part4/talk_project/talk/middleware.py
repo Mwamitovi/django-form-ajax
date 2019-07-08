@@ -1,29 +1,32 @@
+# talk/middleware.py
 import re
-
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.utils.deprecation import MiddlewareMixin
 
 
-class RequireLoginMiddleware(object):
+class RequiredLoginMiddleware(MiddlewareMixin):
     """
-    Middleware component that wraps the login_required decorator around
-    matching URL patterns. To use, add the class to MIDDLEWARE_CLASSES and
-    define LOGIN_REQUIRED_URLS and LOGIN_REQUIRED_URLS_EXCEPTIONS in your
-    settings.py. For example:
+    Middleware component that wraps
+    the login_required decorator around matching URL patterns.
+    To use it, add the class to MIDDLEWARE_CLASSES,
+    then define LOGIN_REQUIRED_URLS and
+    LOGIN_REQUIRED_URLS_EXCEPTIONS in your settings.py.
+    For example:
     ------
-    LOGIN_REQUIRED_URLS = (
-        r'/topsecret/(.*)$',
-    )
+    LOGIN_REQUIRED_URLS = ( r'/topsecret/(.*)$', )
+
     LOGIN_REQUIRED_URLS_EXCEPTIONS = (
         r'/topsecret/login(.*)$',
         r'/topsecret/logout(.*)$',
     )
     ------
-    LOGIN_REQUIRED_URLS is where you define URL patterns; each pattern must
-    be a valid regex.
 
-    LOGIN_REQUIRED_URLS_EXCEPTIONS is, conversely, where you explicitly
-    define any exceptions (like login and logout URLs).
+    LOGIN_REQUIRED_URLS is where you define URL patterns;
+    each pattern must be a valid regex.
+
+    LOGIN_REQUIRED_URLS_EXCEPTIONS is, conversely,
+    where you explicitly define any exceptions (like login and logout URLs).
     """
     def __init__(self):
         self.required = tuple(
@@ -32,6 +35,7 @@ class RequireLoginMiddleware(object):
         self.exceptions = tuple(
             re.compile(url) for url in settings.LOGIN_REQUIRED_URLS_EXCEPTIONS
         )
+        super(RequiredLoginMiddleware, self).__init__()
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         # No need to process URLs if user already logged in
@@ -53,12 +57,3 @@ class RequireLoginMiddleware(object):
         return None
 
 
-class MaintenanceMiddleware(object):
-    """Serve a temporary redirect to a maintenance url in maintenance mode"""
-    def process_request(self, request):
-        if request.method == 'POST':
-            if getattr(settings, 'MAINTENANCE_MODE', False) is True \
-                    and hasattr(settings, 'MAINTENANCE_URL'):
-                # http? where is that defined?
-                return http.HttpResponseRedirect(settings.MAINTENANCE_URL)
-            return None
