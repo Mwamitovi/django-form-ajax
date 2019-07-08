@@ -4,7 +4,8 @@ from talk.forms import PostForm
 from talk.serializers import PostSerializer
 
 from django.shortcuts import render
-from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.mixins import \
+    ListModelMixin, CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
 from rest_framework.generics import GenericAPIView
 
 
@@ -17,7 +18,7 @@ def home(request):
 
 
 class PostCollection(ListModelMixin, CreateModelMixin, GenericAPIView):
-    
+
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -26,6 +27,18 @@ class PostCollection(ListModelMixin, CreateModelMixin, GenericAPIView):
 
     def post(self, request, * args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+
+class PostMember(RetrieveModelMixin, DestroyModelMixin, GenericAPIView):
+
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
 
 # ------- FUNCTIONAL VIEWS ----------
