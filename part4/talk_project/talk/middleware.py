@@ -57,3 +57,15 @@ class RequiredLoginMiddleware(MiddlewareMixin):
         return None
 
 
+class MaintenanceMiddleware(MiddlewareMixin):
+    """
+    Serve a temporary redirect to a maintenance url in maintenance mode
+    """
+    @staticmethod
+    def process_request(request):
+        if request.method == 'POST':
+            if getattr(settings, 'MAINTENANCE_MODE', False) is True \
+                    and hasattr(settings, 'MAINTENANCE_URL'):
+                # http? where is that defined?
+                return http.HttpResponseRedirect(settings.MAINTENANCE_URL)
+            return None
