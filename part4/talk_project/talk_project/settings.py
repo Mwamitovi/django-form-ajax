@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'talk.middleware.RequireLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'talk_project.urls'
@@ -128,3 +129,21 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # "collectstatic" files shall end up here
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+# The RequireLoginMiddleware requires these fields
+
+LOGIN_URL = '/login/'
+
+LOGOUT_URL = '/logout/'
+
+# interpret this regex
+LOGIN_REQUIRED_URLS = (
+    r'/(.*)$',
+)
+
+LOGIN_REQUIRED_URLS_EXCEPTIONS = (
+    r'/login(.*)$',
+    r'/logout(.*)$',
+    r'/staff(.*)$',
+)
