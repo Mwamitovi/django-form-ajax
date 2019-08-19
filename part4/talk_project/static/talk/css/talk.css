@@ -3,6 +3,11 @@
 body > .grid-x { 
     padding-top: 13%; 
 }
+
+body > .grid-x.change-top {
+    padding-top: 5%;
+}
+
 .comment{
     background:rgba(255,255,255,1);
     padding: 8px;

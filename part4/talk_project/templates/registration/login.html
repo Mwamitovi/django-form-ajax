@@ -26,11 +26,7 @@
                     <label for="id_password">Password:</label>
                     {{ form.password }}
                 </p>
-              {% if next %}
-                <input type="hidden" name="next" value="{{ next }}" />
-              {% else %}
                 <input type="hidden" name="next" value="/" />
-              {% endif %}
                 <input type="submit" value="Login" class='button expand radius'/>
             </fieldset>
         </form>

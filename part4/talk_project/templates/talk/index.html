@@ -48,3 +48,15 @@
   {% endif %}
 </div></div>
 {% endblock %}
+
+{% block js %}
+<script type='text/javascript'>
+  let changeTop = {
+      ready : function() {
+          $("body>.grid-x").addClass("change-top");
+      }
+  };
+
+  $(document).ready(changeTop.ready);
+</script>
+{% endblock js %}
