@@ -1,6 +1,5 @@
 
 Django and Form Handling
-(http://mwamitovi.pythonanywhere.com/)
 ========================
 
 This is a four-part series about Django and how to handle forms effectively.
@@ -30,6 +29,8 @@ We refactor the exiting RESTful API based on function based views to class based
 
 - Check out the blog post:
 (https://realpython.com/blog/python/django-and-ajax-form-submissions/)
+
+- See the app in action: (http://mwamitovi.pythonanywhere.com/)
 
 
 ### Contribution guidelines
