@@ -11,7 +11,7 @@
 <div class='large-4 medium-4 cell'>
   <div class="callout">
   {% if form.errors %}
-    <div class='alert-box alert'>Oh fiddlesticks! Please try again.</div>
+    <div class='alert-box alert'>Oh dear! Please try again.</div>
     {% endif %}
     <section>
         <form action="." method="POST">
@@ -26,11 +26,7 @@
                     <label for="id_password">Password:</label>
                     {{ form.password }}
                 </p>
-              {% if next %}
-                <input type="hidden" name="next" value="{{ next }}" />
-              {% else %}
                 <input type="hidden" name="next" value="/" />
-              {% endif %}
                 <input type="submit" value="Login" class='button expand radius'/>
             </fieldset>
         </form>
