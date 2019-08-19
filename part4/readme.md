@@ -35,7 +35,7 @@ Remember, this project is a [JavaScript/jQuery] front on [python/django] back.
    - Fork the repository, into your virtual environment, and activate the environment.
      (Notice that the root project folder: django-form-ajax is auto-created)
 
-   - From the root folder, switch, cd part3.
+   - From the root folder, switch, cd part4.
      And run `pip install` to install the requirements.   
 
    - Switch to new root folder, cd talk_project.
