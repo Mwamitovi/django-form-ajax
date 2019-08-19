@@ -1,3 +1,4 @@
+# talk/views.py
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import QueryDict
@@ -8,25 +9,12 @@ import json
 
 
 def home(req):
-
     tmpl_vars = {
         'all_posts': Post.objects.reverse(),
         'form': PostForm()
     }
     return render(req, 'talk/index.html', tmpl_vars)
 
-
-# def create_post(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.author = request.user
-#             post.save()
-#             return HttpResponseRedirect('/')
-#     else:
-#         form = PostForm()
-#     return render(request, 'post.html', {'form': form})
 
 def create_post(request):
     if request.method == 'POST':
@@ -54,22 +42,19 @@ def create_post(request):
 
 
 def delete_post(request):
-
     if request.method == 'DELETE':
-
-        post = Post.objects.get(pk=int(QueryDict(request.body).get('postpk')))
-
+        post = Post.objects.get(
+            pk=int(QueryDict(request.body).get('postpk'))
+        )
         post.delete()
 
-        response_data = {}
-        response_data['msg'] = 'Post was deleted.'
+        response_data = {'msg': 'Post was deleted.'}
 
-        return HttpResponse(
-            json.dumps(response_data),
-            content_type="application/json"
-        )
+        response = json.dumps(response_data)
     else:
-        return HttpResponse(
-            json.dumps({"nothing to see": "this isn't happening"}),
-            content_type="application/json"
-        )
+        response = json.dumps({"nothing to see": "this isn't happening"})
+
+    return HttpResponse(
+        response,
+        content_type="application/json"
+    )
